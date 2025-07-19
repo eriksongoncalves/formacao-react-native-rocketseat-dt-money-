@@ -1,8 +1,9 @@
 {
   "expo": {
-    "name": "app",
-    "slug": "app",
+    "name": "dt-money",
+    "slug": "dt-money",
     "version": "1.0.0",
+    "scheme": "dt-money",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
