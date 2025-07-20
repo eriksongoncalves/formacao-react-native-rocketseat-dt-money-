@@ -11,10 +11,12 @@
   "dependencies": {
     "@react-navigation/native": "^6.1.18",
     "@react-navigation/stack": "^6.4.1",
+    "clsx": "^2.1.1",
     "expo": "~53.0.20",
     "expo-status-bar": "~2.2.3",
     "nativewind": "^4.1.23",
     "react": "19.0.0",
+    "react-hook-form": "^7.60.0",
     "react-native": "0.79.5",
     "react-native-edge-to-edge": "^1.6.2",
     "react-native-gesture-handler": "~2.24.0",
