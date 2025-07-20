@@ -1,3 +1,4 @@
+import { PropsWithChildren } from "react";
 import {
   Keyboard,
   KeyboardAvoidingView,
@@ -6,9 +7,7 @@ import {
 import { ScrollView } from "react-native-gesture-handler";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-type DismissKeyboardViewProps = {
-  children: React.ReactNode;
-};
+type DismissKeyboardViewProps = PropsWithChildren;
 
 export const DismissKeyboardView = ({ children }: DismissKeyboardViewProps) => {
   return (
