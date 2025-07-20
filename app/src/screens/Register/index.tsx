@@ -6,15 +6,15 @@ import { PublicStackParamsList } from "@/routes/PublicRoutes";
 
 type NavigationProps = StackNavigationProp<PublicStackParamsList>;
 
-export const Login = () => {
+export const Register = () => {
   const navigation = useNavigation<NavigationProps>();
 
   return (
     <View className="flex-1 items-center justify-center">
-      <Text>Tela de login!</Text>
+      <Text>Tela de Register!</Text>
 
-      <TouchableOpacity onPress={() => navigation.navigate("Register")}>
-        <Text>Registar</Text>
+      <TouchableOpacity onPress={navigation.goBack}>
+        <Text>Voltar</Text>
       </TouchableOpacity>
     </View>
   );
