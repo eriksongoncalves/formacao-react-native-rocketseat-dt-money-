@@ -1,25 +1,18 @@
-import { Text, TouchableOpacity, View } from "react-native";
-import { useNavigation } from "@react-navigation/native";
-import { StackNavigationProp } from "@react-navigation/stack";
+import { View } from "react-native";
 
-import { PublicStackParamsList } from "@/routes/PublicRoutes";
-import { TextInput } from "react-native-gesture-handler";
 import { DismissKeyboardView } from "@/components/DismissKeyboardView";
-
-type NavigationProps = StackNavigationProp<PublicStackParamsList>;
+import { AuthHeader } from "@/components/AuthHeader";
+import { LoginForm } from "./LoginForm";
 
 export const Login = () => {
-  const navigation = useNavigation<NavigationProps>();
-
   return (
     <DismissKeyboardView>
-      <Text>Tela de login!</Text>
-
-      <TextInput className="bg-gray-500 w-full" />
-
-      <TouchableOpacity onPress={() => navigation.navigate("Register")}>
-        <Text>Registar</Text>
-      </TouchableOpacity>
+      <DismissKeyboardView>
+        <View className="flex-1 w-[82%] self-center">
+          <AuthHeader />
+          <LoginForm />
+        </View>
+      </DismissKeyboardView>
     </DismissKeyboardView>
   );
 };
