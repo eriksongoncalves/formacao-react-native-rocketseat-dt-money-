@@ -7,6 +7,8 @@ import { AppButton } from "@/components/AppButton";
 import { AppInput } from "@/components/AppInput";
 import { PublicStackParamsList } from "@/routes/PublicRoutes";
 import { colors } from "@/shared/colors";
+import { useErrorHandler } from "@/shared/hooks/useErrorHandler";
+import { useAuthContext } from "@/context/auth.context";
 import { schema } from "./schema";
 
 export interface FormLoginParams {
@@ -15,6 +17,7 @@ export interface FormLoginParams {
 }
 
 export const LoginForm = () => {
+  const navigation = useNavigation<NavigationProp<PublicStackParamsList>>();
   const {
     control,
     handleSubmit,
@@ -27,15 +30,14 @@ export const LoginForm = () => {
     resolver: yupResolver(schema),
   });
 
-  const navigation = useNavigation<NavigationProp<PublicStackParamsList>>();
+  const { handleError } = useErrorHandler();
+  const { handleAuthenticate } = useAuthContext();
 
   const onSubmit = async (userData: FormLoginParams) => {
     try {
-      // await handleAuthenticate(userData);
-      console.log(">>> userData", userData);
+      await handleAuthenticate(userData);
     } catch (error) {
-      console.log(">>> error", error);
-      // handleError(error, "Falha ao logar");
+      handleError(error, "Falha ao logar");
     }
   };
 
