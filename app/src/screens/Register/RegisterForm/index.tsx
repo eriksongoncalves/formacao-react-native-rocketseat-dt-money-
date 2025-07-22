@@ -1,12 +1,15 @@
 import { ActivityIndicator, Text, View } from "react-native";
+import { NavigationProp, useNavigation } from "@react-navigation/native";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 
 import { AppButton } from "@/components/AppButton";
 import { AppInput } from "@/components/AppInput";
 import { PublicStackParamsList } from "@/routes/PublicRoutes";
-import { NavigationProp, useNavigation } from "@react-navigation/native";
 import { colors } from "@/shared/colors";
+import { useAuthContext } from "@/context/auth.context";
+import { useErrorHandler } from "@/shared/hooks/useErrorHandler";
+import { AppError } from "@/shared/helpers/AppError";
 import { schema } from "./schema";
 
 export interface FormRegisterParams {
@@ -17,6 +20,8 @@ export interface FormRegisterParams {
 }
 
 export const RegisterForm = () => {
+  const navigation = useNavigation<NavigationProp<PublicStackParamsList>>();
+
   const {
     control,
     handleSubmit,
@@ -31,13 +36,16 @@ export const RegisterForm = () => {
     resolver: yupResolver(schema),
   });
 
-  const navigation = useNavigation<NavigationProp<PublicStackParamsList>>();
+  const { handleRegister } = useAuthContext();
+  const { handleError } = useErrorHandler();
 
   const onSubmit = async (userData: FormRegisterParams) => {
     try {
-      console.log(">>> userData", userData);
+      await handleRegister(userData);
     } catch (error) {
-      console.log(">>> error", error);
+      if (error instanceof AppError) {
+        handleError(error, "Falha ao cadastrar usuário");
+      }
     }
   };
 
