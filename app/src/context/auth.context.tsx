@@ -32,6 +32,7 @@ export const AuthContextProvider: FC<PropsWithChildren> = ({ children }) => {
 
   const handleAuthenticate = async (userData: FormLoginParams) => {
     const { token, user } = await authService.authenticate(userData);
+
     await AsyncStorage.setItem(
       "dt-money-user",
       JSON.stringify({ user, token })
@@ -43,6 +44,7 @@ export const AuthContextProvider: FC<PropsWithChildren> = ({ children }) => {
 
   const handleRegister = async (formData: FormRegisterParams) => {
     const { token, user } = await authService.registerUser(formData);
+
     await AsyncStorage.setItem(
       "dt-money-user",
       JSON.stringify({ user, token })
@@ -54,17 +56,20 @@ export const AuthContextProvider: FC<PropsWithChildren> = ({ children }) => {
 
   const handleLogout = async () => {
     await AsyncStorage.clear();
+
     setUser(null);
     setToken(null);
   };
 
   const restoreUserSession = async () => {
     const userData = await AsyncStorage.getItem("dt-money-user");
+
     if (userData) {
       const { token, user } = JSON.parse(userData) as IAuthenticateResponse;
       setUser(user);
       setToken(token);
     }
+
     return userData;
   };
 
